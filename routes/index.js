@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { MESSAGE } = require('../utils/constants');
 
 const userRouter = require('./users');
 const moviesRouter = require('./movies');
@@ -16,7 +17,7 @@ router.post('/signup', signupValidator, createUser);
 router.use('/users', auth, userRouter);
 router.use('/movies', auth, moviesRouter);
 router.use('/', auth, (req, res, next) => {
-  next(new NotFoundError('Страница не найдена'));
+  next(new NotFoundError(MESSAGE.PAGE_NOT_FOUND));
 });
 
 module.exports = router;
